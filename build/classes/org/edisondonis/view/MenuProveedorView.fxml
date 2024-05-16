@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="1056.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.edisondonis.controller.MenuProveedorController">
+   <children>
+      <ImageView fitHeight="612.0" fitWidth="1056.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/VistaProveedor.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="93.0" layoutY="159.0" prefHeight="333.0" prefWidth="178.0" stylesheets="@../resource/Button2.css">
+         <children>
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregar" prefHeight="75.0" prefWidth="200.0" stylesheets="@../resource/Button2.css" text="AGREGAR" />
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="75.0" prefWidth="200.0" stylesheets="@../resource/Button2.css" text="ELIMINAR" />
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" prefHeight="75.0" prefWidth="200.0" stylesheets="@../resource/Button2.css" text="EDITAR" />
+            <Button fx:id="btnReporte" mnemonicParsing="false" onAction="#reporte" prefHeight="75.0" prefWidth="200.0" stylesheets="@../resource/Button2.css" text="REPORTES" />
+            <Button fx:id="btnRegresar" mnemonicParsing="false" onAction="#regresar" prefHeight="75.0" prefWidth="200.0" stylesheets="@../resource/Button2.css" text="SALIR" />
+         </children>
+      </VBox>
+      <ScrollPane layoutX="310.0" layoutY="159.0" prefHeight="355.0" prefWidth="362.0">
+         <content>
+            <VBox prefHeight="354.0" prefWidth="362.0">
+               <children>
+                  <Label text="NIT" />
+                  <TextField fx:id="txtNitProveedores" />
+                  <Label text="NOMBRE" />
+                  <TextField fx:id="txtNombreProveedores" />
+                  <Label text="APELLIDO" />
+                  <TextField fx:id="txtApellidoProveedores" />
+                  <Label text="DIRECCION" />
+                  <TextField fx:id="txtDireccionProveedores" />
+                  <Label text="RAZON SOCIAL" />
+                  <TextField fx:id="txtRazonSocial" />
+                  <Label text="CONTACTO PRINCIPAL" />
+                  <TextField fx:id="txtContactoPrincipal" />
+                  <Label text="PAGINA WEB" />
+                  <TextField fx:id="txtPaginaWeb" />
+                  <Label text="CODIGO PROVEEDOR" />
+                  <TextField fx:id="txtCodigoProveedores" />
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="701.0" layoutY="159.0" prefHeight="355.0" prefWidth="318.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="1000.0">
+               <children>
+                  <TableView fx:id="tblProveedores" prefHeight="400.0" prefWidth="1000.0">
+                    <columns>
+                      <TableColumn fx:id="colCodigoProveedores" minWidth="30.0" prefWidth="125.0" text="CodigoProveedores" />
+                      <TableColumn fx:id="colNombreProveedores" minWidth="30.0" prefWidth="125.0" text="NombreProveedores" />
+                        <TableColumn fx:id="colApellidoProveedores" minWidth="30.0" prefWidth="125.0" text="ApellidoProveedores" />
+                        <TableColumn fx:id="colDireccionProveedores" minWidth="30.0" prefWidth="125.0" text="DireccionProveedores" />
+                        <TableColumn fx:id="colRazonSocial" minWidth="30.0" prefWidth="125.0" text="RazonSocial" />
+                        <TableColumn fx:id="colContactoPrincipal" minWidth="30.0" prefWidth="125.0" text="ContactoPrincipal" />
+                        <TableColumn fx:id="colPaginaWeb" minWidth="30.0" prefWidth="125.0" text="PaginaWeb" />
+                        <TableColumn fx:id="colNitProveedores" minWidth="30.0" prefWidth="125.0" text="NitProveedor" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
