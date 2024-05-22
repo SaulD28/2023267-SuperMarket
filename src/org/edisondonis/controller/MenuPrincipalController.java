@@ -9,7 +9,7 @@ import javafx.scene.control.MenuItem;
 import org.edisondonis.system.Main;
 
 /* Herencia multiple concepto, interfacez. POO
- A randy le gusta alvaro, adrian, rivas se los come completos
+ A randy le gusta alvaro, adrian, rivas se los come completos y los ama y los azota
  */
 public class MenuPrincipalController implements Initializable {
     private Main escenarioPrincipal;
