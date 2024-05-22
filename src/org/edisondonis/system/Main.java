@@ -113,9 +113,11 @@ public class Main extends Application {
         }
     }
     
+    
+    
     public void menuTipoProductoView(){
         try{
-        MenuTipoProductoController menuTipoProductoView = (MenuTipoProductoController)cambiarEscena("MenuTipoProdcuto.fxmol",1056 ,596);
+        MenuTipoProductoController menuTipoProductoView = (MenuTipoProductoController)cambiarEscena("MenuTipoProductoView.fxml",1056 ,596);
         menuTipoProductoView.setEscenarioPrincipal(this);
         }catch(Exception e){
             e.printStackTrace();

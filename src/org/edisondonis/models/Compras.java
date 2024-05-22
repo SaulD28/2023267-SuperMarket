@@ -5,17 +5,19 @@
  */
 package org.edisondonis.models;
 
+import java.time.LocalDate;
+
 
 public class Compras {
     private int numeroDocumento;
-    private String fechaDocumento;
+    private LocalDate fechaDocumento;
     private String descripcion;
-    private String totalDocumento;
+    private double totalDocumento;
 
     public Compras() {
     }
 
-    public Compras(int numeroDocumento, String fechaDocumento, String descripcion, String totalDocumento) {
+    public Compras(int numeroDocumento, LocalDate fechaDocumento, String descripcion, double totalDocumento) {
         this.numeroDocumento = numeroDocumento;
         this.fechaDocumento = fechaDocumento;
         this.descripcion = descripcion;
@@ -30,11 +32,11 @@ public class Compras {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public String getFechaDocumento() {
+    public LocalDate getFechaDocumento() {
         return fechaDocumento;
     }
 
-    public void setFechaDocumento(String fechaDocumento) {
+    public void setFechaDocumento(LocalDate fechaDocumento) {
         this.fechaDocumento = fechaDocumento;
     }
 
@@ -46,13 +48,16 @@ public class Compras {
         this.descripcion = descripcion;
     }
 
-    public String getTotalDocumento() {
+    public double getTotalDocumento() {
         return totalDocumento;
     }
 
-    public void setTotalDocumento(String totalDocumento) {
+    public void setTotalDocumento(double totalDocumento) {
         this.totalDocumento = totalDocumento;
     }
+
     
+
+   
     
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.edisondonis.controller;
 
 import java.net.URL;
@@ -50,9 +45,6 @@ public class MenuCargoEmpleadoController implements Initializable {
     @FXML private Button btnEditar;
     @FXML private Button btnReporte;  
     @FXML private ImageView imgAgregar;
-    @FXML private ImageView imgEditar;
-    @FXML private ImageView imgEliminar;
-    @FXML private ImageView imgReporte;   
     
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -62,13 +54,13 @@ public class MenuCargoEmpleadoController implements Initializable {
     public void cargarDatos(){
         tblCargoEmpleados.setItems(getCargoEmpleados());
         colCodigoEmpleados.setCellValueFactory(new PropertyValueFactory<CargoEmpleado, Integer>("idCargoEmpleado"));
-        colNombreCargo.setCellValueFactory(new PropertyValueFactory<CargoEmpleado, Integer>("nombreCargo"));
-        colDescripcionCargo.setCellValueFactory(new PropertyValueFactory<CargoEmpleado, Integer>("descripcionCargo"));
+        colNombreCargo.setCellValueFactory(new PropertyValueFactory<CargoEmpleado, String>("nombreCargo"));
+        colDescripcionCargo.setCellValueFactory(new PropertyValueFactory<CargoEmpleado, String>("descripcionCargo"));
 
     }
     
     public void seleccionarElemento(){
-        txtCodigoEmpleados.setText(String.valueOf(((CargoEmpleado)tblCargoEmpleados.getSelectionModel().getSelectedItem()).getClass()));
+        txtCodigoEmpleados.setText(String.valueOf(((CargoEmpleado)tblCargoEmpleados.getSelectionModel().getSelectedItem()).getIdCargoEmpleado()));
         txtNombreCargo.setText(((CargoEmpleado)tblCargoEmpleados.getSelectionModel().getSelectedItem()).getNombreCargo());
         txtDescripcionCargo.setText(((CargoEmpleado)tblCargoEmpleados.getSelectionModel().getSelectedItem()).getDescripcionCargo());
 
@@ -102,24 +94,22 @@ public class MenuCargoEmpleadoController implements Initializable {
     public void agregar(){
         switch(tipoDeOperaciones){
             case NINGUNO:
+                limpiarControles();
                 activarControles();
-                btnAgregar.setText("GUARDAR");
-                btnEliminar.setText("ELIMINAR");
+                btnAgregar.setText("Guardar");
+                btnEliminar.setText("Cancelar");
                 btnEditar.setDisable(true);
                 btnReporte.setDisable(true);
-                imgAgregar.setImage(new Image("/org/edisondonis/image/Guardar.png"));
-                imgEliminar.setImage(new Image("/org/edisondonis/image/Cancelar.png"));
                 tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
+                guardar();
                 desactivarControles();
                 limpiarControles();
-                btnAgregar.setText("AGREGAR");
-                btnEliminar.setText("ELIMINAR");
+                btnAgregar.setText("Agregar");
+                btnEliminar.setText("Eliminar");
                 btnEditar.setDisable(false);
                 btnReporte.setDisable(false);
-                imgAgregar.setImage(new Image("/org/edisondonis/image/AgregarClientes.png"));
-                imgEliminar.setImage(new Image("/org/edisondonis/image/Cancelar.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }
@@ -134,8 +124,6 @@ public class MenuCargoEmpleadoController implements Initializable {
                 btnEliminar.setText("ELIMINAR");
                 btnEditar.setDisable(false);
                 btnReporte.setDisable(false);
-                imgAgregar.setImage(new Image("/org/edisondonis/image/AgregarClientes.png"));
-                imgEliminar.setImage(new Image("/org/edisondonis/image/Cancelar.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default:
@@ -157,7 +145,7 @@ public class MenuCargoEmpleadoController implements Initializable {
         }
     }
     
-     public void editar(){
+    public void editar(){
         switch(tipoDeOperaciones){
             case NINGUNO:
                 if(tblCargoEmpleados.getSelectionModel().getSelectedItem() != null){
@@ -165,8 +153,7 @@ public class MenuCargoEmpleadoController implements Initializable {
                     btnReporte.setText("CANCELAR");
                     btnAgregar.setDisable(true);
                     btnEliminar.setDisable(true);
-                    imgEditar.setImage(new Image(""));
-                    imgReporte.setImage(new Image(""));
+                    activarControles();
                     txtCodigoEmpleados.setEditable(false);
                     tipoDeOperaciones = operaciones.ACTUALIZAR;
                 }else
@@ -178,12 +165,10 @@ public class MenuCargoEmpleadoController implements Initializable {
                     btnReporte.setText("REPORTE");
                     btnAgregar.setDisable(false);
                     btnEliminar.setDisable(false);
-                    imgEditar.setImage(new Image(""));
-                    imgReporte.setImage(new Image(""));
                     desactivarControles();
-                    limpiarControles();
                     tipoDeOperaciones = operaciones.NINGUNO;
                     cargarDatos();
+                    limpiarControles();
                 break;
         }
     }
@@ -213,8 +198,6 @@ public class MenuCargoEmpleadoController implements Initializable {
                 btnReporte.setText("REPORTE");
                 btnAgregar.setDisable(false);
                 btnEliminar.setDisable(false);
-                imgEditar.setImage(new Image(""));
-                imgReporte.setImage(new Image(""));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }

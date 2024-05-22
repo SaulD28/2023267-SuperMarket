@@ -55,16 +55,16 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="1000.0">
                <children>
-                  <TableView fx:id="tblProveedores" prefHeight="400.0" prefWidth="1000.0">
+                  <TableView fx:id="tblProveedores" onMouseClicked="#seleccionarElemento" prefHeight="400.0" prefWidth="1000.0">
                     <columns>
                       <TableColumn fx:id="colCodigoProveedores" minWidth="30.0" prefWidth="125.0" text="CodigoProveedores" />
-                      <TableColumn fx:id="colNombreProveedores" minWidth="30.0" prefWidth="125.0" text="NombreProveedores" />
-                        <TableColumn fx:id="colApellidoProveedores" minWidth="30.0" prefWidth="125.0" text="ApellidoProveedores" />
-                        <TableColumn fx:id="colDireccionProveedores" minWidth="30.0" prefWidth="125.0" text="DireccionProveedores" />
+                      <TableColumn fx:id="colNitProveedores" minWidth="30.0" prefWidth="125.0" text="NitPRoveedores" />
+                        <TableColumn fx:id="colNombreProveedores" minWidth="30.0" prefWidth="125.0" text="NombreProveedor" />
+                        <TableColumn fx:id="colApellidoProveedores" minWidth="30.0" prefWidth="125.0" text="ApellidoProveedor" />
+                        <TableColumn fx:id="colDireccionProveedores" minWidth="30.0" prefWidth="125.0" text="DireccionProveedor" />
                         <TableColumn fx:id="colRazonSocial" minWidth="30.0" prefWidth="125.0" text="RazonSocial" />
                         <TableColumn fx:id="colContactoPrincipal" minWidth="30.0" prefWidth="125.0" text="ContactoPrincipal" />
                         <TableColumn fx:id="colPaginaWeb" minWidth="30.0" prefWidth="125.0" text="PaginaWeb" />
-                        <TableColumn fx:id="colNitProveedores" minWidth="30.0" prefWidth="125.0" text="NitProveedor" />
                     </columns>
                   </TableView>
                </children>

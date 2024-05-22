@@ -47,24 +47,20 @@ public class MenuTipoProductoController implements Initializable {
     @FXML private Button btnEliminar;
     @FXML private Button btnEditar;
     @FXML private Button btnReporte;  
-    @FXML private ImageView imgAgregar;
-    @FXML private ImageView imgEditar;
-    @FXML private ImageView imgEliminar;
-    @FXML private ImageView imgReporte;    
-    
-    @Override
+
+    @FXML
     public void initialize(URL location, ResourceBundle resources){
         cargarDatos();
     }
     
     public void cargarDatos(){
         tblTipoProductos.setItems(getTipoProductos());
-        colCodigoProductos.setCellValueFactory(new PropertyValueFactory<TipoProducto, Integer>("idTipoProductos"));
-        colDescripcion.setCellValueFactory(new PropertyValueFactory<TipoProducto, Integer>("descripcion"));
+        colCodigoProductos.setCellValueFactory(new PropertyValueFactory<TipoProducto, Integer>("idTipoProducto"));
+        colDescripcion.setCellValueFactory(new PropertyValueFactory<TipoProducto, String>("descripcion"));
     }
     
     public void seleccionarElemento(){
-        txtCodigoProductos.setText(String.valueOf(((TipoProducto)tblTipoProductos.getSelectionModel().getSelectedItem()).getClass()));
+        txtCodigoProductos.setText(String.valueOf(((TipoProducto)tblTipoProductos.getSelectionModel().getSelectedItem()).getIdTipoProducto()));
         txtDescripcion.setText(((TipoProducto)tblTipoProductos.getSelectionModel().getSelectedItem()).getDescripcion());
     }
     
@@ -74,7 +70,7 @@ public class MenuTipoProductoController implements Initializable {
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_ListarTipoProducto()");
             ResultSet resultado = procedimiento.executeQuery();
             while(resultado.next()){
-                lista.add(new TipoProducto(resultado.getInt("idTipoProductos"),
+                lista.add(new TipoProducto(resultado.getInt("idTipoProducto"),
                                        resultado.getString("descripcion")
                         ));
             }
@@ -95,24 +91,22 @@ public class MenuTipoProductoController implements Initializable {
     public void agregar(){
         switch(tipoDeOperaciones){
             case NINGUNO:
+                limpiarControles();
                 activarControles();
-                btnAgregar.setText("GUARDAR");
-                btnEliminar.setText("ELIMINAR");
+                btnAgregar.setText("Guardar");
+                btnEliminar.setText("Cancelar");
                 btnEditar.setDisable(true);
                 btnReporte.setDisable(true);
-                imgAgregar.setImage(new Image("/org/edisondonis/image/Guardar.png"));
-                imgEliminar.setImage(new Image("/org/edisondonis/image/Cancelar.png"));
                 tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
+                guardar();
                 desactivarControles();
                 limpiarControles();
-                btnAgregar.setText("AGREGAR");
-                btnEliminar.setText("ELIMINAR");
+                btnAgregar.setText("Agregar");
+                btnEliminar.setText("Eliminar");
                 btnEditar.setDisable(false);
                 btnReporte.setDisable(false);
-                imgAgregar.setImage(new Image("/org/edisondonis/image/AgregarClientes.png"));
-                imgEliminar.setImage(new Image("/org/edisondonis/image/Cancelar.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }
@@ -123,12 +117,6 @@ public class MenuTipoProductoController implements Initializable {
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
-                btnAgregar.setText("AGREGAR");
-                btnEliminar.setText("ELIMINAR");
-                btnEditar.setDisable(false);
-                btnReporte.setDisable(false);
-                imgAgregar.setImage(new Image("/org/edisondonis/image/AgregarClientes.png"));
-                imgEliminar.setImage(new Image("/org/edisondonis/image/Cancelar.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default:
@@ -158,8 +146,7 @@ public class MenuTipoProductoController implements Initializable {
                     btnReporte.setText("CANCELAR");
                     btnAgregar.setDisable(true);
                     btnEliminar.setDisable(true);
-                    imgEditar.setImage(new Image(""));
-                    imgReporte.setImage(new Image(""));
+                    activarControles();
                     txtCodigoProductos.setEditable(false);
                     tipoDeOperaciones = operaciones.ACTUALIZAR;
                 }else
@@ -171,12 +158,10 @@ public class MenuTipoProductoController implements Initializable {
                     btnReporte.setText("REPORTE");
                     btnAgregar.setDisable(false);
                     btnEliminar.setDisable(false);
-                    imgEditar.setImage(new Image(""));
-                    imgReporte.setImage(new Image(""));
                     desactivarControles();
-                    limpiarControles();
                     tipoDeOperaciones = operaciones.NINGUNO;
                     cargarDatos();
+                    limpiarControles();
                 break;
         }
     }
@@ -204,8 +189,6 @@ public class MenuTipoProductoController implements Initializable {
                 btnReporte.setText("REPORTE");
                 btnAgregar.setDisable(false);
                 btnEliminar.setDisable(false);
-                imgEditar.setImage(new Image(""));
-                imgReporte.setImage(new Image(""));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }

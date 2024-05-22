@@ -12,22 +12,18 @@ public class Conexion {
     private Connection conexion;
     private static Conexion instancia;
     
-    public Conexion(){
-        try{
+    
+    public Conexion() {
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBSuperMarket?useSSL=false", "2023147_IN5BV", "abc123!!");
-        }catch(ClassNotFoundException e){
-            e.printStackTrace();
-        }catch(InstantiationException e){
-            e.printStackTrace();
-        }catch(IllegalAccessException e){
-            e.printStackTrace();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }catch(Exception e){
-            e.printStackTrace();
+            conexion = DriverManager.getConnection
+        ("jdbc:mysql://localhost:3306/DBSuperMarket?useSSL=false","root","2023267");
+        } catch (ClassNotFoundException | SQLException
+                | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace(); 
         }
     }
+    
     public static Conexion getInstance(){
         if(instancia == null)
             instancia = new Conexion();

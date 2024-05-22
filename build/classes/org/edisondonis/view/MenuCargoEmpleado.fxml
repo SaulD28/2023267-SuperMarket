@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="1123.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="1123.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.edisondonis.controller.MenuCargoEmpleadoController">
    <children>
       <ImageView fitHeight="729.0" fitWidth="1123.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -49,7 +49,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="476.0" prefWidth="451.0">
                <children>
-                  <TableView fx:id="tblCargoEmpleados" prefHeight="480.0" prefWidth="457.0">
+                  <TableView fx:id="tblCargoEmpleados" onMouseClicked="#seleccionarElemento" prefHeight="480.0" prefWidth="457.0">
                     <columns>
                       <TableColumn fx:id="colCodigoEmpleados" minWidth="50.0" prefWidth="150.0" text="CodigoEmpleado" />
                       <TableColumn fx:id="colNombreCargo" prefWidth="150.0" text="NombreCargo" />
