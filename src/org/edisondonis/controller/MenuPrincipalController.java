@@ -1,7 +1,4 @@
-
 package org.edisondonis.controller;
-
-
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,7 +9,7 @@ import javafx.scene.control.MenuItem;
 import org.edisondonis.system.Main;
 
 /* Herencia multiple concepto, interfacez. POO
- A randy le gusta alvaro y adrian se los come completos
+ A randy le gusta alvaro, adrian, rivas se los come completos
  */
 public class MenuPrincipalController implements Initializable {
     private Main escenarioPrincipal;
