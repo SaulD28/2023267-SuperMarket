@@ -5,10 +5,23 @@
  */
 package org.edisondonis.controller;
 
+import org.edisondonis.system.Main;
+
 /**
  *
  * @author picor
  */
 public class MenuDetalleCompraController {
+    private Main escenarioPrincipal;
     
+    
+    
+    
+     public Main getEscenarioPrincipal() {
+        return escenarioPrincipal;
+    }
+
+    public void setEscenarioPrincipal(Main escenarioPrincipal) {
+        this.escenarioPrincipal = escenarioPrincipal;
+    }
 }

@@ -27,6 +27,13 @@ public class MenuPrincipalController implements Initializable {
     @FXML private MenuItem btnMenuTipoProducto;
     @FXML private MenuItem btnMenuCargoEmpleado;
     @FXML private MenuItem btnProgramador;
+    @FXML private MenuItem btnMenuDetalleCompra;
+    @FXML private MenuItem btnMenuDetalleFactura;
+    @FXML private MenuItem btnMenuEmailProveedor;
+    @FXML private MenuItem btnMenuEmpleados;
+    @FXML private MenuItem btnMenuFactura;
+    @FXML private MenuItem btnMenuProductos;
+    @FXML private MenuItem btnMenuTelefonoProveedor;
 
 
     @Override
@@ -56,6 +63,20 @@ public class MenuPrincipalController implements Initializable {
             escenarioPrincipal.menuTipoProductoView();
         }else if(event.getSource() == btnMenuCargoEmpleado){
             escenarioPrincipal.menuCargoEmpleadoView();
+        }else if(event.getSource() == btnMenuDetalleCompra){
+            escenarioPrincipal.menuDetalleCompraView();
+        }else if(event.getSource() == btnMenuDetalleFactura){
+            escenarioPrincipal.menuDetalleFacturaView();
+        }else if(event.getSource() == btnMenuEmailProveedor){
+            escenarioPrincipal.menuEmailProveedorView();
+        }else if(event.getSource() == btnMenuEmpleados){
+            escenarioPrincipal.menuEmpleadosView();
+        }else if(event.getSource() == btnMenuFactura){
+            escenarioPrincipal.menuFacturaView();
+        }else if(event.getSource() == btnMenuProductos){
+            escenarioPrincipal.menuProductosView();
+        }else if(event.getSource() == btnMenuTelefonoProveedor){
+            escenarioPrincipal.menuTelefonoProveedorView();
         }
     }
 }

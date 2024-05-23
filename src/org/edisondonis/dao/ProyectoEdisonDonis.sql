@@ -54,7 +54,7 @@ create table TipoProducto(
 -- ---------------------Entidades con llaves foraneas -------------------------------------------------
 
 create table Productos (
-	idProducto varchar (15) not null,
+	idProducto int not null,
 	descripcionProducto varchar (45) not null,
 	precioUnitario decimal (10,2) not null,
 	precioDocena decimal (10,2) not null,
@@ -75,7 +75,7 @@ create table DetalleCompra (
 	idDetalleCompra int not null,
 	costoUnitario decimal (10,2) not null,
     cantidad int not null,
-	idProducto varchar (15)not null,
+	idProducto int not null,
 	numeroDocumento int not null,
 	primary key PK_idDetalleCompra (idDetalleCompra),
     constraint FK_Productos_idetalleCompra foreign key (idProducto)
@@ -96,54 +96,54 @@ create table TelefonoProveedor (
 );
 
 create table EmailProveedor (
-	codigoEmailProveedor int not null,
+	idEmailProveedor int not null,
 	emailProveedor varchar (50) not null,
 	descripcion varchar (100) not null,
-	codigoProveedor int not null,
-	primary key PK_codigoEmailProveedor (codigoEmailProveedor),
-	constraint FK_Proveedores_EmailProveedor foreign key (codigoProveedor)
-	references Proveedores (codigoProveedor)
+	idProveedor int not null,
+	primary key PK_idEmailProveedor (idEmailProveedor),
+	constraint FK_Proveedores_EmailProveedor foreign key (idProveedor)
+	references Proveedores (idProveedor)
 );
 
 create table Empleados (
-	codigoEmpleado int not null,
+	idEmpleado int not null,
 	nombreEmpleado varchar (30) not null,
 	apellidoEmpleado varchar (30) not null,
 	sueldo decimal (10,2),
 	direccion varchar (150),
 	turno varchar (15),
-	codigoCargoEmpleado int not null,
-	primary key PK_codigoEmpleado (codigoEmpleado),
-	constraint FK_CargoEmpleado_Empleados foreign key (codigoCargoEmpleado)
-	references CargoEmpleado (codigoCargoEmpleado)
+	idCargoEmpleado int not null,
+	primary key PK_idEmpleado (idEmpleado),
+	constraint FK_CargoEmpleado_Empleados foreign key (idCargoEmpleado)
+	references CargoEmpleado (idCargoEmpleado)
 );
 
 
 create table Factura (
-	numeroFactura int not null,
+	idFactura int not null,
     estado varchar (50) not null,
     totalFactura decimal (10,2) not null,
 	fechaFactura varchar (45),
-	codigoCliente int not null,
-	codigoEmpleado int not null,
-	primary key PK_numeroFactura (numeroFactura),
-	constraint FK_Clientes_Factura foreign key (codigoCliente)
-	references Clientes (codigoCliente),
-	constraint FK_Empleados_Factura foreign key (codigoEmpleado)
-	references Empleados (codigoEmpleado)
+	idCliente int not null,
+	idEmpleado int not null,
+	primary key PK_idFactura (idFactura),
+	constraint FK_Clientes_Factura foreign key (idCliente)
+	references Clientes (idCliente),
+	constraint FK_Empleados_Factura foreign key (idEmpleado)
+	references Empleados (idEmpleado)
 );
 
 create table DetalleFactura (
-	codigoDetalleFactura int not null,
+	idDetalleFactura int not null,
     precioUnitario decimal (10,2) not null,
     cantidad int not null,
-	numeroFactura int not null,
-	codigoProducto varchar(15) not null,
-	primary key PK_codigoDetalleFactura (codigoDetalleFactura),
-	constraint FK_Factura_DetalleFactura foreign key (numeroFactura)
-	references Factura (numeroFactura),
-	constraint FK_Productos_DetalleFactura foreign key (codigoProducto)
-	references Productos (codigoProducto)
+	idFactura int not null,
+	idProducto int not null,
+	primary key PK_idDetalleFactura (idDetalleFactura),
+	constraint FK_Factura_DetalleFactura foreign key (idFactura)
+	references Factura (idFactura),
+	constraint FK_Productos_DetalleFactura foreign key (idProducto)
+	references Productos (idProducto)
 );
  
 -- ---------------------------------procedimientos almacenados -------------------------
@@ -721,6 +721,307 @@ Delimiter $$
             numeroSecundario = _numeroSecundario,
             observaciones = _observaciones,
             idProveedor = _idProveedor
-            where codigoTelefonoProveedor = _idTelefonoProveedor;
+            where idTelefonoProveedor = _idTelefonoProveedor;
 		End $$
 Delimiter ;
+
+
+-- ************************************************************Agregar EmailProveedor******************************************************************
+Delimiter $$
+	create procedure sp_AgregarEmailProveedor(in idEmailProveedor int, in emailProveedor varchar(50),in descripcion varchar(100),in idProveedor int) 
+		Begin 
+			Insert into EmailProveedor (idEmailProveedor,emailProveedor, descripcion, idProveedor) values 
+            (idEmailProveedor,emailProveedor, descripcion, idProveedor);
+            
+		End $$
+Delimiter ;
+
+call sp_AgregarEmailProveedor();
+call sp_AgregarEmailProveedor();
+call sp_AgregarEmailProveedor();
+-- ************************************************************Listar EmailProveedor******************************************************************
+Delimiter $$
+	create procedure sp_ListarEmailProveedor()
+		Begin 
+			select
+            EP.idEmailProveedor,
+			EP.emailProveedor,
+            EP.descripcion,
+            EP.idProveedor
+			from EmailProveedor EP;
+		End $$
+Delimiter ;
+
+call sp_ListarEmailProveedor();
+-- ************************************************************Buscar EmailProveedor******************************************************************
+Delimiter $$
+	create procedure sp_BuscarEmailProveedor(in id int)
+		Begin 
+			select
+            EP.idEmailProveedor,
+			EP.emailProveedor,
+            EP.descripcion,
+            EP.idProveedor
+			from EmailProveedor EP
+			where idEmailProveedor = id;
+		End $$
+Delimiter ;
+
+call sp_BuscarEmailProveedor();
+-- ************************************************************Eliminar EmailProveedor******************************************************************
+Delimiter $$
+	create procedure sp_EliminarEmailProveedor(in id int)
+		Begin
+			Delete from EmailProveedor
+				where idEmailProveedor = id;
+        End $$
+Delimiter ;
+
+call sp_EliminarEmailProveedor();
+call sp_ListarEmailProveedor();
+-- ************************************************************Editar EmailProveedor******************************************************************
+Delimiter $$
+	create procedure sp_EditarEmailProveedor(in _idEmailProveedor int, in _emailProveedor varchar(50),in _descripcion varchar(100),in _idProveedor int) 
+		Begin 
+			update EmailProveedor 
+				set
+            idEmailProveedor = _idEmaiProveedor,
+			emailProveedor = _emailProveedor,
+            descripcion = _descripcion,
+            idProveedor = _idProveedor
+			where idEmailProveedor = _idEmailProveedor;
+		End $$
+Delimiter ;
+
+call sp_EditarEmailProveedor(); 
+call sp_ListarEmailProveedor();
+
+-- ************************************************************Agregar Empleados******************************************************************
+Delimiter $$
+	create procedure sp_AgregarEmpleados(in idEmpleado int, in nombreEmpleado varchar(30),in apellidoEmpleado varchar(100),in sueldo decimal (10,2), 
+    in direccion varchar(150), in turno varchar (15), in idCargoEmpleado int) 
+		Begin 
+			Insert into Empleados (idEmpleado,nombreEmpleado, apellidoEmpleado, sueldo, direccion, turno, idCargoEmpleado) values 
+            (idEmpleado,nombreEmpleado, apellidoEmpleado, sueldo, direccion, turno, idCargoEmpleado);
+            
+		End $$
+Delimiter ;
+
+call sp_AgregarEmpleados();
+call sp_AgregarEmpleados();
+call sp_AgregarEmpleados();
+-- ************************************************************Listar Empleados******************************************************************
+Delimiter $$
+	create procedure sp_ListarEmpleados()
+		Begin 
+			select
+            E.idEmpleado,
+			E.nombreEmpleado,
+            E.apellidoEmpleado,
+            E.sueldo,
+            E.direccion,
+            E.turno,
+            E.idCargoEmpleado
+			from Empleados E;
+		End $$
+Delimiter ;
+
+call sp_ListarEmpleados();
+-- ************************************************************Buscar Empleados******************************************************************
+Delimiter $$
+	create procedure sp_BuscarEmpleados(in id int)
+		Begin 
+			select
+            E.idEmpleado,
+			E.nombreEmpleado,
+            E.apellidoEmpleado,
+            E.sueldo,
+            E.direccion,
+            E.turno,
+            E.idCargoEmpleado
+			from Empleados E
+			where idEmpleado = id;
+		End $$
+Delimiter ;
+
+call sp_BuscarEmpleados();
+-- ************************************************************Eliminar Empleados******************************************************************
+Delimiter $$
+	create procedure sp_EliminarEmpleados(in id int)
+		Begin
+			Delete from Empleados
+				where idEmpleado = id;
+        End $$
+Delimiter ;
+
+call sp_EliminarEmpleados();
+call sp_ListarEmpleados();
+-- ************************************************************Editar Empleados******************************************************************
+Delimiter $$
+	create procedure sp_EditarEmpleados(in _idEmpleado int, in _nombreEmpleado varchar(50),in _apellidoEmpleado varchar(100),in _sueldo int, in _direccion varchar(150),
+    in _turno varchar(15), in _idCargoEmpleado int) 
+		Begin 
+			update Empleados 
+				set
+            _idEmpleado = _idEmpleado,
+			nombreEmpleado = _nombreEmpleado,
+            apellidoEmpleado = _apellidoEmpleado,
+            sueldo = _sueldo,
+            direccion = _direccion,
+            turno = _turno,
+            idCargoEmpleado = _idCargoEmpleado
+			where idEmpleado = _idEmpleado;
+		End $$
+Delimiter ;
+
+call sp_EditarEmpleados(); 
+call sp_ListarEmpleados();
+
+
+-- ************************************************************Agregar Factura******************************************************************
+Delimiter $$
+	create procedure sp_AgregarFactura(in idFactura int, in estado varchar(50),in totalFactura decimal(10,2),in fechaFactura varchar(45), 
+    in idCliente int, in idEmpleado int) 
+		Begin 
+			Insert into Factura (idFactura,estado, totalFactura, fechaFactura, idCliente, idEmpleado) values 
+            (idFactura,estado, totalFactura, fechaFactura, idCliente, idEmpleado);
+            
+		End $$
+Delimiter ;
+
+call sp_AgregarFactura();
+call sp_AgregarFactura();
+call sp_AgregarFactura();
+-- ************************************************************Listar Factura******************************************************************
+Delimiter $$
+	create procedure sp_ListarFactura()
+		Begin 
+			select
+            F.idFactura,
+			F.estado,
+            F.totalFactura,
+            F.fechaFactura,
+            F.idCliente,
+            F.idEmpleado
+			from Factura F;
+		End $$
+Delimiter ;
+
+call sp_ListarFactura();
+-- ************************************************************Buscar Factura******************************************************************
+Delimiter $$
+	create procedure sp_BuscarFactura(in id int)
+		Begin 
+			select
+            F.idFactura,
+			F.estado,
+            F.totalFactura,
+            F.fechaFactura,
+            F.idCliente,
+            F.idEmpleado
+			from Factura F
+			where idFactura = id;
+		End $$
+Delimiter ;
+
+call sp_BuscarFactura();
+-- ************************************************************Eliminar Factura******************************************************************
+Delimiter $$
+	create procedure sp_EliminarFactura(in id int)
+		Begin
+			Delete from Factura
+				where idFactura = id;
+        End $$
+Delimiter ;
+
+call sp_EliminarFactura();
+call sp_ListarFactura();
+-- ************************************************************Editar Factura******************************************************************
+Delimiter $$
+	create procedure sp_EditarFactura(in _idFactura int, in _estado varchar(50),in _totalFactura decimal(10,2),in _fechaFactura varchar(45), in _idCliente int,
+    in _idEmpleado int) 
+		Begin 
+			update Factura 
+				set
+            idFactura = _idFactura,
+			estado = _estado,
+            totalFactura = _totalFactura,
+            fechaFactura = _fechaFactura,
+            idCliente = _idClientes,
+            idEmpleado = _idEmpleado
+			where numeroFactura = numFact;
+		End $$
+Delimiter ;
+
+-- ************************************************************Agregar DetalleFactura******************************************************************
+
+Delimiter $$
+	create procedure sp_AgregarDetalleFactura(in idDetalleFactura int, in precioUnitario decimal (10,2),in cantidad int, in idFactura int ,in idProducto varchar(15)) 
+		Begin 
+			Insert into Factura (idDetalleFactura, precioUnitario, cantidad, numeroFactura, idProducto) values 
+            (idDetalleFactura, precioUnitario, cantidad, numeroFactura, idProducto);
+		End $$
+Delimiter ;
+
+call sp_AgregarDetalleFactura();
+call sp_AgregarDetalleFactura();
+call sp_AgregarDetalleFactura();
+-- ************************************************************Listar DetalleFactura******************************************************************
+Delimiter $$
+	create procedure sp_ListarDetalleFactura()
+		Begin 
+			select
+            DF.idDetalleFactura,
+			DF.precioUnitario,
+			DF.cantidad,
+            DF.idFactura,
+            DF.idProducto
+			from DetalleFactura DF;
+		End $$
+Delimiter ;
+
+call sp_ListarDetalleFactura();
+-- ************************************************************Buscar DetalleFactura******************************************************************
+Delimiter $$
+	create procedure sp_BuscarDetalleFactura(in id int)
+		Begin 
+			select
+            DF.idDetalleFactura,
+			DF.precioUnitario,
+			DF.cantidad,
+            DF.idFactura,
+            DF.idProducto
+			from DetalleFactura DF
+			where idDetalleFactura = id;
+		End $$
+Delimiter ;
+
+call sp_BuscarDetalleFactura();
+-- ************************************************************Eliminar DetalleFactura******************************************************************
+Delimiter $$
+	create procedure sp_EliminarDetalleFactura(in id int)
+		Begin
+			Delete from DetalleFactura
+				where idDetalleFactura = id;
+        End $$
+Delimiter ;
+
+call sp_EliminarDetalleFactura();
+call sp_ListarDetalleFactura();
+-- ************************************************************Editar DetalleFactura******************************************************************
+Delimiter $$
+	create procedure sp_EditarDetalleFactura(in _idDetalleFactura int, in _precioUnitario decimal (10,2), in _cantidad int, in _idFactura int, in _idProveedor varchar(15)) 
+		Begin 
+			update DetalleFactura 
+				set
+            idDetalleFactura = _idDetalleFactura,
+			precioUnitario = _precioUnitario,
+			cantidad = _cantidad,
+            idFactura = _idFactura,
+            idProducto = _idProducto
+			where idDetalleFactura = _idDetalleFactura;
+		End $$
+Delimiter ;
+
+call sp_EditarDetalleFactura(); 
+call sp_ListarDetalleFactura();

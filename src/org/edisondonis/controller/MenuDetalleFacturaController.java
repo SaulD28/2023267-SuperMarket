@@ -5,10 +5,24 @@
  */
 package org.edisondonis.controller;
 
+import java.security.Principal;
+import org.edisondonis.system.Main;
+
 /**
  *
  * @author picor
  */
 public class MenuDetalleFacturaController {
+   private Main escenarioPrincipal;
     
+    
+    
+    
+     public Main getEscenarioPrincipal() {
+        return escenarioPrincipal;
+    }
+
+    public void setEscenarioPrincipal(Main escenarioPrincipal) {
+        this.escenarioPrincipal = escenarioPrincipal;
+    }
 }
