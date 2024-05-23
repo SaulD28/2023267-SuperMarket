@@ -246,6 +246,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
+call sp_agregarProveedores(1, '202326', 'Luis','Hernandez','zona 18','falta de cereal','kinal','kinal.academy');
 -- -----------------------------------------------------------------ListarProveedores-------------------------------------------------------------------------------------
 Delimiter $$
 	create procedure sp_ListarProveedores()
@@ -439,6 +440,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
+call sp_AgregarTipoProducto(1, 'zucaritas');
 -- ----------------------------------------------------------Listar TipoProducto------------------------------------------------------------------------------------------
 Delimiter $$
 	create procedure sp_ListarTipoProducto()
@@ -497,12 +499,9 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_AgregarProductos('102', 'Estas manzanas Gala orgánicas de EcoHarvest 
-', 13.99, 10.99, 9.99,'', 11,1,00010);
-call sp_AgregarProductos('120','El filete de res Wagyu PrimeCut 
-', 15.99, 13.99, 12.99,'', 15, 2,00020);
-call sp_AgregarProductos('122','El filete de res Wagyu PrimeCut 
-', 12.99, 15.99, 20.99,'', 15, 2,00020);
+-- call sp_AgregarProductos('102', 'Estas manzanas Gala orgánicas de EcoHarvest ', 13.99, 10.99, 9.99,'231', 11,1,1);
+
+-- call sp_listarProveedores();
 -- *********************************************************Listar Producto***********************************************************************
 -- drop procedure sp_EliminarProductos;
 Delimiter $$
@@ -522,7 +521,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_ListarProductos();
+-- call sp_ListarProductos();
  
 -- *********************************************************Buscar Producto***********************************************************************
 Delimiter $$
@@ -543,7 +542,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_BuscarProductos('102');
+-- call sp_BuscarProductos('102');
 
 -- *********************************************************Eliminar Producto***********************************************************************
 Delimiter $$
@@ -554,8 +553,8 @@ Delimiter $$
         End $$
 Delimiter ;
 
-call sp_EliminarProductos('122');
-call sp_ListarProductos();
+-- call sp_EliminarProductos('122');
+-- call sp_ListarProductos();
 
 -- ************************************************************Editar Producto*******************************************************************
 Delimiter $$
@@ -589,9 +588,9 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_AgregarDetalleCompra();
-call sp_AgregarDetalleCompra();
-call sp_AgregarDetalleCompra();
+-- call sp_AgregarDetalleCompra();
+-- call sp_AgregarDetalleCompra();
+-- call sp_AgregarDetalleCompra();
 -- ************************************************************Listar DetalleCompra******************************************************************
 Delimiter $$
 	create procedure sp_ListarDetalleCompra()
@@ -606,7 +605,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_ListarDetalleCompra();
+-- call sp_ListarDetalleCompra();
 -- ************************************************************Buscar DetalleCompra******************************************************************
 Delimiter $$
 	create procedure sp_BuscarDetalleCompra(in id int)
@@ -622,7 +621,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_BuscarDetalleCompra();
+-- call sp_BuscarDetalleCompra();
 -- ************************************************************Eliminar DetalleCompra******************************************************************
 Delimiter $$
 	create procedure sp_EliminarDetalleCompra(in id int)
@@ -632,8 +631,8 @@ Delimiter $$
         End $$
 Delimiter ;
 
-call sp_EliminarDetalleCompra();
-call sp_ListarDetalleCompra();
+-- call sp_EliminarDetalleCompra();
+-- call sp_ListarDetalleCompra();
 -- ************************************************************Editar DetalleCompra*********************************************************************
 Delimiter $$
 	create procedure sp_EditarDetalleCompra(in _idDetalleCompra varchar(15),in _costoUnitario decimal (10,2),
@@ -650,8 +649,8 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_EditarDetalleCompra(); 
-call sp_ListarDetalleCompra();
+-- call sp_EditarDetalleCompra(); 
+-- call sp_ListarDetalleCompra();
 
 -- ************************************************************Agregar TelefonoProveedor****************************************************************
 Delimiter $$
@@ -664,9 +663,9 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_AgregarTelefonoProveedor();
-call sp_AgregarTelefonoProveedor();
-call sp_AgregarTelefonoProveedor();
+-- call sp_AgregarTelefonoProveedor();
+-- call sp_AgregarTelefonoProveedor();
+-- call sp_AgregarTelefonoProveedor();
 -- ************************************************************Listar TelefonoProveedor****************************************************************
 Delimiter $$
 	create procedure sp_ListarTelefonoProveedor()
@@ -681,7 +680,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_ListarTelefonoProveedor();
+-- call sp_ListarTelefonoProveedor();
 -- ************************************************************Buscar TelefonoProveedor****************************************************************
 Delimiter $$
 	create procedure sp_BuscarTelefonoProveedor(in id int)
@@ -697,7 +696,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_BuscarTelefonoProveedor();
+-- call sp_BuscarTelefonoProveedor();
 -- ************************************************************Eliminar TelefonoProveedor****************************************************************
 Delimiter $$
 	create procedure sp_EliminarTelefonoProveedor(in id int)
@@ -707,8 +706,8 @@ Delimiter $$
         End $$
 Delimiter ;
 
-call sp_EliminarTelefonoProveedor();
-call sp_ListarTelefonoProveedor();
+-- call sp_EliminarTelefonoProveedor();
+-- call sp_ListarTelefonoProveedor();
 -- ************************************************************Editar TelefonoProveedor****************************************************************
 Delimiter $$
 	create procedure sp_EditarTelefonoProveedor(in _idTelefonoProveedor varchar(15),in _numeroPrincipal decimal (10,2),
@@ -736,9 +735,8 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_AgregarEmailProveedor();
-call sp_AgregarEmailProveedor();
-call sp_AgregarEmailProveedor();
+-- call sp_AgregarEmailProveedor();
+
 -- ************************************************************Listar EmailProveedor******************************************************************
 Delimiter $$
 	create procedure sp_ListarEmailProveedor()
@@ -752,7 +750,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_ListarEmailProveedor();
+-- call sp_ListarEmailProveedor();
 -- ************************************************************Buscar EmailProveedor******************************************************************
 Delimiter $$
 	create procedure sp_BuscarEmailProveedor(in id int)
@@ -767,7 +765,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_BuscarEmailProveedor();
+-- call sp_BuscarEmailProveedor();
 -- ************************************************************Eliminar EmailProveedor******************************************************************
 Delimiter $$
 	create procedure sp_EliminarEmailProveedor(in id int)
@@ -777,8 +775,8 @@ Delimiter $$
         End $$
 Delimiter ;
 
-call sp_EliminarEmailProveedor();
-call sp_ListarEmailProveedor();
+-- call sp_EliminarEmailProveedor();
+-- call sp_ListarEmailProveedor();
 -- ************************************************************Editar EmailProveedor******************************************************************
 Delimiter $$
 	create procedure sp_EditarEmailProveedor(in _idEmailProveedor int, in _emailProveedor varchar(50),in _descripcion varchar(100),in _idProveedor int) 
@@ -793,8 +791,8 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_EditarEmailProveedor(); 
-call sp_ListarEmailProveedor();
+-- call sp_EditarEmailProveedor(); 
+-- call sp_ListarEmailProveedor();
 
 -- ************************************************************Agregar Empleados******************************************************************
 Delimiter $$
@@ -807,9 +805,9 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_AgregarEmpleados();
-call sp_AgregarEmpleados();
-call sp_AgregarEmpleados();
+-- call sp_AgregarEmpleados();
+-- call sp_AgregarEmpleados();
+-- call sp_AgregarEmpleados();
 -- ************************************************************Listar Empleados******************************************************************
 Delimiter $$
 	create procedure sp_ListarEmpleados()
@@ -826,7 +824,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_ListarEmpleados();
+-- call sp_ListarEmpleados();
 -- ************************************************************Buscar Empleados******************************************************************
 Delimiter $$
 	create procedure sp_BuscarEmpleados(in id int)
@@ -844,7 +842,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_BuscarEmpleados();
+-- call sp_BuscarEmpleados();
 -- ************************************************************Eliminar Empleados******************************************************************
 Delimiter $$
 	create procedure sp_EliminarEmpleados(in id int)
@@ -854,8 +852,8 @@ Delimiter $$
         End $$
 Delimiter ;
 
-call sp_EliminarEmpleados();
-call sp_ListarEmpleados();
+-- call sp_EliminarEmpleados();
+-- call sp_ListarEmpleados();
 -- ************************************************************Editar Empleados******************************************************************
 Delimiter $$
 	create procedure sp_EditarEmpleados(in _idEmpleado int, in _nombreEmpleado varchar(50),in _apellidoEmpleado varchar(100),in _sueldo int, in _direccion varchar(150),
@@ -874,8 +872,8 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_EditarEmpleados(); 
-call sp_ListarEmpleados();
+-- call sp_EditarEmpleados(); 
+-- call sp_ListarEmpleados();
 
 
 -- ************************************************************Agregar Factura******************************************************************
@@ -889,9 +887,9 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_AgregarFactura();
-call sp_AgregarFactura();
-call sp_AgregarFactura();
+-- call sp_AgregarFactura();
+-- mcall sp_AgregarFactura();
+-- call sp_AgregarFactura();
 -- ************************************************************Listar Factura******************************************************************
 Delimiter $$
 	create procedure sp_ListarFactura()
@@ -907,7 +905,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_ListarFactura();
+-- call sp_ListarFactura();
 -- ************************************************************Buscar Factura******************************************************************
 Delimiter $$
 	create procedure sp_BuscarFactura(in id int)
@@ -924,7 +922,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_BuscarFactura();
+-- call sp_BuscarFactura();
 -- ************************************************************Eliminar Factura******************************************************************
 Delimiter $$
 	create procedure sp_EliminarFactura(in id int)
@@ -934,8 +932,8 @@ Delimiter $$
         End $$
 Delimiter ;
 
-call sp_EliminarFactura();
-call sp_ListarFactura();
+-- call sp_EliminarFactura();
+-- call sp_ListarFactura();
 -- ************************************************************Editar Factura******************************************************************
 Delimiter $$
 	create procedure sp_EditarFactura(in _idFactura int, in _estado varchar(50),in _totalFactura decimal(10,2),in _fechaFactura varchar(45), in _idCliente int,
@@ -963,9 +961,9 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_AgregarDetalleFactura();
-call sp_AgregarDetalleFactura();
-call sp_AgregarDetalleFactura();
+-- call sp_AgregarDetalleFactura();
+-- call sp_AgregarDetalleFactura();
+-- call sp_AgregarDetalleFactura();
 -- ************************************************************Listar DetalleFactura******************************************************************
 Delimiter $$
 	create procedure sp_ListarDetalleFactura()
@@ -980,7 +978,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_ListarDetalleFactura();
+-- call sp_ListarDetalleFactura();
 -- ************************************************************Buscar DetalleFactura******************************************************************
 Delimiter $$
 	create procedure sp_BuscarDetalleFactura(in id int)
@@ -996,7 +994,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_BuscarDetalleFactura();
+-- call sp_BuscarDetalleFactura();
 -- ************************************************************Eliminar DetalleFactura******************************************************************
 Delimiter $$
 	create procedure sp_EliminarDetalleFactura(in id int)
@@ -1006,8 +1004,8 @@ Delimiter $$
         End $$
 Delimiter ;
 
-call sp_EliminarDetalleFactura();
-call sp_ListarDetalleFactura();
+-- call sp_EliminarDetalleFactura();
+-- call sp_ListarDetalleFactura();
 -- ************************************************************Editar DetalleFactura******************************************************************
 Delimiter $$
 	create procedure sp_EditarDetalleFactura(in _idDetalleFactura int, in _precioUnitario decimal (10,2), in _cantidad int, in _idFactura int, in _idProveedor varchar(15)) 
@@ -1023,5 +1021,5 @@ Delimiter $$
 		End $$
 Delimiter ;
 
-call sp_EditarDetalleFactura(); 
-call sp_ListarDetalleFactura();
+-- call sp_EditarDetalleFactura(); 
+-- call sp_ListarDetalleFactura();

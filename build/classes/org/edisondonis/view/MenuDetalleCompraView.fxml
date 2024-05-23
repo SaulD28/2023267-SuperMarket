@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="671.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -30,19 +32,34 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="518.0" prefWidth="283.0">
                <children>
-                  <VBox prefHeight="526.0" prefWidth="289.0" />
+                  <VBox prefHeight="526.0" prefWidth="289.0">
+                     <children>
+                        <Label text="ID DETALLE COMPRA" />
+                        <TextField />
+                        <Label text="COSTO UNITARIO" />
+                        <TextField />
+                        <Label text="CANTIDAD" />
+                        <TextField />
+                        <Label text="ID PRODUCTO" />
+                        <ComboBox prefWidth="150.0" />
+                        <Label text="NUMERO DOCUMENTO" />
+                        <ComboBox prefWidth="150.0" />
+                     </children></VBox>
                </children>
             </AnchorPane>
         </content>
       </ScrollPane>
       <ScrollPane layoutX="598.0" layoutY="168.0" prefHeight="486.0" prefWidth="272.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="514.0" prefWidth="309.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="514.0" prefWidth="514.0">
                <children>
-                  <TableView prefHeight="521.0" prefWidth="317.0">
+                  <TableView prefHeight="521.0" prefWidth="512.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn prefWidth="100.0" text="idDetalleCompra" />
+                      <TableColumn prefWidth="100.0" text="costoUnitario" />
+                        <TableColumn prefWidth="100.0" text="cantidad" />
+                        <TableColumn prefWidth="100.0" text="idProducto" />
+                        <TableColumn prefWidth="100.0" text="numeroDocumento" />
                     </columns>
                   </TableView>
                </children>
