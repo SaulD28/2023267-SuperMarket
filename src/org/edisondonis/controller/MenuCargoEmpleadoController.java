@@ -204,7 +204,7 @@ public class MenuCargoEmpleadoController implements Initializable {
     }
      
     public void desactivarControles(){
-        txtCodigoEmpleados.setEditable(false);
+        txtCodigoEmpleados  .setEditable(false);
         txtNombreCargo.setEditable(false);
         txtDescripcionCargo.setEditable(false);
     }    
