@@ -230,8 +230,11 @@ public class MenuProveedorController implements Initializable   {
         }
     }
 
-    public void reporte() {
-        switch (tipoDeOperaciones) {
+   public void reporte(){
+        switch(tipoDeOperaciones){
+            case NINGUNO:
+                imprimirReporte();
+                break;
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();

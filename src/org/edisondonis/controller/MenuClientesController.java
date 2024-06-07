@@ -3,6 +3,8 @@ package org.edisondonis.controller;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +20,7 @@ import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 import org.edisondonis.dao.Conexion;
 import org.edisondonis.models.Clientes;
+import org.edisondonis.report.GenerarReportes;
 import org.edisondonis.system.Main;
 
 
@@ -210,6 +213,9 @@ public class MenuClientesController implements Initializable {
     
     public void reporte(){
         switch(tipoDeOperaciones){
+            case NINGUNO:
+                imprimirReporte();
+                break;
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
@@ -221,6 +227,14 @@ public class MenuClientesController implements Initializable {
                 break;
         }
     }
+    
+    public void imprimirReporte(){
+        Map parametros = new HashMap();
+        parametros.put("idClientes", null);
+        GenerarReportes.mostrarReportes("ReporteClientes.jasper", "Reporte de los clientes", parametros);
+        
+    }
+    
     public void desactivarControles(){
         txtCodigoClientes.setEditable(false);
         txtNitClientes.setEditable(false);
