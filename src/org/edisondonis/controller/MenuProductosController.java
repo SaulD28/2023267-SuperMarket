@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -27,9 +28,9 @@ import org.edisondonis.models.TipoProducto;
 import org.edisondonis.system.Main;
 
 
-public class MenuProductosController {
+public class MenuProductosController implements Initializable {
     private Main escenarioPrincipal;
-     private enum operaciones{AGREGAR, ELIMINAR, EDITAR, ACTUALIZAR, CANCELAR, NINGUNO}
+    private enum operaciones{AGREGAR, ELIMINAR, EDITAR, ACTUALIZAR, CANCELAR, NINGUNO}
     private operaciones tipoDeOperacion = operaciones.NINGUNO;
     private ObservableList <Productos> listaProductos;
     private ObservableList <Proveedores> listaProveedores;
