@@ -1,5 +1,6 @@
 package org.edisondonis.controller;
 
+
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
@@ -22,6 +23,7 @@ import org.edisondonis.system.Main;
  *
  * @author picor
  */
+/*
 public class MenuDetalleCompraController implements Initializable{
     private Main escenarioPrincipal;
     private enum operaciones{AGREGAR, ELIMINAR, EDITAR, ACTUALIZAR, CANCELAR, NINGUNO}
