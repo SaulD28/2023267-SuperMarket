@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +30,7 @@ import javax.swing.JOptionPane;
 import org.edisondonis.dao.Conexion;
 import org.edisondonis.models.Compras;
 import org.edisondonis.models.TipoProducto;
+import org.edisondonis.report.GenerarReportes;
 import org.edisondonis.system.Main;
 
 /**
@@ -203,8 +206,18 @@ public class MenuComprasController implements Initializable {
         }
     }
     
-     public void reporte(){
+     public void imprimirReporte(){
+        Map parametros = new HashMap();
+        parametros.put("idCompra", null);
+        GenerarReportes.mostrarReportes("ReporteCompras.jasper", "Reporte de los compras", parametros);
+        
+    }
+    
+    public void reporte(){
         switch(tipoDeOperaciones){
+            case NINGUNO:
+                imprimirReporte();
+                break;
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();

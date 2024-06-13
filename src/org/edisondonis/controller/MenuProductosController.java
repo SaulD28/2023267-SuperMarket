@@ -11,11 +11,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.JOptionPane;
 import org.edisondonis.dao.Conexion;
 import org.edisondonis.models.Productos;
 import org.edisondonis.models.Proveedores;
@@ -37,8 +37,8 @@ public class MenuProductosController implements Initializable {
     @FXML private TextField txtPrecioDocena;
     @FXML private TextField txtPrecioMayor;
     @FXML private TextField txtExistencia;
-    @FXML private ComboBox cmbCodigoProveedor;
-    @FXML private ComboBox cmbCodigoTipoProducto;
+    @FXML private TextField txtCodigoProveedor;
+    @FXML private TextField txtCodigoTipoProducto;
     @FXML private TableView tblProductos;
     @FXML private TableColumn colCodigoProducto;
     @FXML private TableColumn colDescripcionProducto;
@@ -57,8 +57,7 @@ public class MenuProductosController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cargarDatos();
-        cmbCodigoProveedor.setItems(buscarProveedores());
-        cmbCodigoTipoProducto.setItems(buscarTipoProducto());
+        desactivarControles();
     }
 
 
@@ -83,63 +82,22 @@ public class MenuProductosController implements Initializable {
        txtPrecioDocena.setText(String.valueOf(((Productos)tblProductos.getSelectionModel().getSelectedItem()).getPrecioDocena()));
        txtPrecioMayor.setText(String.valueOf(((Productos)tblProductos.getSelectionModel().getSelectedItem()).getPrecioMayor()));
        txtExistencia.setText(String.valueOf(((Productos)tblProductos.getSelectionModel().getSelectedItem()).getExistencia()));
-       cmbCodigoTipoProducto.getSelectionModel().select(buscarTipoProducto(((Productos)tblProductos.getSelectionModel().getSelectedItem()).getIdTipoProducto()));
-       cmbCodigoProveedor.getSelectionModel().select(buscarProveedores(((Productos)tblProductos.getSelectionModel().getSelectedItem()).getIdProveedor()));
+       txtCodigoTipoProducto.setText(String.valueOf(((Productos)tblProductos.getSelectionModel().getSelectedItem()).getIdTipoProducto()));
+       txtCodigoProveedor.setText(String.valueOf(((Productos)tblProductos.getSelectionModel().getSelectedItem()).getIdProveedor()));
     }
     
-    public TipoProducto buscarTipoProducto (int codigoTipoProducto ){
-        TipoProducto resultado = null;
-        try{
-         PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_buscarTipoProducto(?)");
-         procedimiento.setInt(1, codigoTipoProducto);
-         ResultSet registro = procedimiento.executeQuery();
-         while (registro.next()){
-             resultado = new TipoProducto(registro.getInt("idTipoProducto"),
-                                            registro.getString("descripcionProducto")
-             );
-         }
-        }catch (Exception e){
-            e.printStackTrace();
-        }    
-    
-        return resultado;
-    }
-    
-       public Proveedores buscarProveedores (int codigoProveedores ){
-        Proveedores resultado = null;
-        try{
-         PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_buscarProveedores(?)");
-         procedimiento.setInt(1, codigoProveedores);
-         ResultSet registro = procedimiento.executeQuery();
-         while (registro.next()){
-             resultado = new Proveedores(registro.getInt("idProveedor"),
-                                            registro.getString("NitProveedor"),
-                                            registro.getString("nombreProveedor"),
-                                            registro.getString("apellidoProveedor"),
-                                            registro.getString("direccionProveedor"),
-                                            registro.getString("razonSocial"),
-                                            registro.getString("contactoPrincipal"),
-                                            registro.getString("paginaWeb")
-             );
-         }
-        }catch (Exception e){
-            e.printStackTrace();
-        }    
-    
-        return resultado;
-    }
         public void guardar (){
             Productos registro = new Productos();
-            registro.setIdProducto((txtCodigoProducto.getText()));
-            registro.setIdProveedor(((Proveedores)cmbCodigoProveedor.getSelectionModel().getSelectedItem()).getIdProveedor());
-            registro.setIdTipoProducto(((TipoProducto)cmbCodigoTipoProducto.getSelectionModel().getSelectedItem()).getIdTipoProducto());
+            registro.setIdProducto(Integer.parseInt(txtCodigoProducto.getText()));
+            registro.setIdProveedor(Integer.parseInt(txtCodigoProveedor.getText()));
+            registro.setIdTipoProducto(Integer.parseInt(txtCodigoTipoProducto.getText()));
             registro.setDescripcionProducto(txtDescripcionProducto.getText());
             registro.setPrecioDocena(Double.parseDouble(txtPrecioDocena.getText()));
             registro.setPrecioUnitario(Double.parseDouble(txtPrecioUnitario.getText()));
             registro.setPrecioMayor(Double.parseDouble(txtPrecioMayor.getText()));
             registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
             try {
-                PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall ("call sp_agregarProducto(?, ?, ?, ?, ?, ?, ?, ?)");
+                PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall ("call sp_AgregarProducto(?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 procedimiento.setInt(1, registro.getIdProducto());
                 procedimiento.setString(2, registro.getDescripcionProducto());
                 procedimiento.setDouble(3, registro.getPrecioUnitario());
@@ -178,11 +136,38 @@ public class MenuProductosController implements Initializable {
     }catch (Exception e){
         e.printStackTrace();
     }
-    
-    
-    return listaProductos = FXCollections.observableArrayList(lista);
+     return listaProductos = FXCollections.observableArrayList(lista);
         
     }
+ 
+    
+    public void actualizar(){
+        try{
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_EditarProducto(?)");
+            Productos registro = (Productos) tblProductos.getSelectionModel().getSelectedItem();
+            registro.setDescripcionProducto(txtDescripcionProducto.getText());
+            registro.setPrecioUnitario(Double.parseDouble(txtPrecioUnitario.getText()));
+            registro.setPrecioDocena(Double.parseDouble(txtPrecioDocena.getText()));
+            registro.setPrecioMayor(Double.parseDouble(txtPrecioMayor.getText()));
+            registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
+            registro.setIdProveedor(Integer.parseInt(txtCodigoProveedor.getText()));
+            registro.setIdTipoProducto(Integer.parseInt(txtCodigoTipoProducto.getText()));
+            procedimiento.setInt(1, registro.getIdProducto());
+            procedimiento.setString(2, registro.getDescripcionProducto());
+            procedimiento.setDouble(3, registro.getPrecioUnitario());
+            procedimiento.setDouble(4, registro.getPrecioDocena());
+            procedimiento.setDouble(5, registro.getPrecioMayor());
+            procedimiento.setInt(6, registro.getExistencia());
+            procedimiento.setInt(7, registro.getIdProveedor());
+            procedimiento.setInt(9, registro.getIdTipoProducto());
+            procedimiento.execute();
+            procedimiento.execute();
+            listaProductos.add(registro);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
      
      public void desactivarControles(){
         txtCodigoProducto.setEditable(false);
@@ -191,8 +176,8 @@ public class MenuProductosController implements Initializable {
         txtPrecioDocena.setEditable(false);
         txtPrecioMayor.setEditable(false);
         txtExistencia.setEditable(false);
-        cmbCodigoProveedor.setEditable(false);
-        cmbCodigoTipoProducto.setEditable(false);
+        txtCodigoProveedor.setEditable(false);
+        txtCodigoTipoProducto.setEditable(false);
     }    
     
     public void activarControles(){
@@ -202,9 +187,8 @@ public class MenuProductosController implements Initializable {
         txtPrecioDocena.setEditable(true);
         txtPrecioMayor.setEditable(true);
         txtExistencia.setEditable(true);
-        cmbCodigoProveedor.setEditable(true);
-        cmbCodigoTipoProducto.setEditable(true);
-
+        txtCodigoProveedor.setEditable(true);
+        txtCodigoTipoProducto.setEditable(true);
     }    
     
     public void limpiarControles(){
@@ -214,8 +198,8 @@ public class MenuProductosController implements Initializable {
         txtPrecioDocena.clear();
         txtPrecioMayor.clear();
         txtExistencia.clear();
-        cmbCodigoProveedor.getSelectionModel().getSelectedItem();
-        cmbCodigoTipoProducto.getSelectionModel().getSelectedItem();
+        txtCodigoProveedor.clear();
+        txtCodigoTipoProducto.clear();
     }    
     
      public void agregar (){
@@ -241,6 +225,85 @@ public class MenuProductosController implements Initializable {
              break;
          }
     
+    }
+     
+     public void eliminar(){
+         switch (tipoDeOperacion){
+             case ACTUALIZAR:
+                 desactivarControles();
+                 limpiarControles();
+                 btnAgregar.setText("AGREGAR");
+                 btnEliminar.setText("ELIMINAR");
+                 btnEditar.setDisable(false);
+                 btnReporte.setDisable(false);
+                 tipoDeOperacion = operaciones.NINGUNO;
+                 break;
+             default:
+                 if(tblProductos.getSelectionModel().getSelectedItem() != null){
+                     int respuesta = JOptionPane.showConfirmDialog(null, "CONFIRMA SI SE ELIMINA EL REGISTRO", "ELIMINAR PRODUCTOS", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                     if(respuesta == JOptionPane.YES_OPTION){
+                         try{
+                             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("Call sp_EliminarProductos(?)");
+                             procedimiento.setInt(1, ((Productos) tblProductos.getSelectionModel().getSelectedItem()).getIdProducto());
+                             procedimiento.execute();
+                             listaProductos.remove(tblProductos.getSelectionModel().getSelectedItem());
+                             limpiarControles();
+                         }catch(Exception e){
+                             e.printStackTrace();
+                         }
+                     }else {
+                         JOptionPane.showMessageDialog(null, "DEBE DE ALMENOS SELECCIONAR UN PROUCTO");
+                     }
+                 }
+                 
+         }
+    }
+     
+    public void editar(){
+        switch(tipoDeOperacion){
+            case NINGUNO:
+                if(tblProductos.getSelectionModel().getSelectedItem() != null){
+                    btnEditar.setText("ACTUALIZAR");
+                    btnReporte.setText("CANCELAR");
+                    btnAgregar.setDisable(true);
+                    btnEliminar.setDisable(true);
+                    activarControles();
+                    txtCodigoProducto.setDisable(true);
+                    tipoDeOperacion = operaciones.ACTUALIZAR;
+                    
+                }else {
+                    JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN PRODUCTO");
+                }
+                break;
+            case ACTUALIZAR:
+                actualizar();
+                btnEditar.setText("EDITAR");
+                btnReporte.setText("CANCELAR");
+                btnAgregar.setDisable(false);
+                btnEliminar.setDisable(false);
+                desactivarControles();
+                txtCodigoProducto.setDisable(false);
+                tipoDeOperacion = operaciones.NINGUNO;
+                limpiarControles();
+                cargarDatos();
+                break;
+                
+        }
+    }
+    
+    public void reporte(){
+        switch(tipoDeOperacion){
+            case ACTUALIZAR:
+                desactivarControles();
+                limpiarControles();
+                btnEditar.setText("EDITAR");
+                btnReporte.setText("REPORTE");
+                btnAgregar.setDisable(false);
+                btnEliminar.setDisable(false);
+                txtCodigoProducto.setDisable(false);
+                tipoDeOperacion = operaciones.NINGUNO;
+                break;
+        }
     }
    
     public Main getEscenarioPrincipal(){

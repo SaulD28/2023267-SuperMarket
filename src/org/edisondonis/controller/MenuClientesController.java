@@ -292,8 +292,6 @@ public class MenuClientesController implements Initializable {
         
     }
     
-    
-    
     @FXML
     public void regresar (ActionEvent event){
         if(event.getSource() == btnRegresar){

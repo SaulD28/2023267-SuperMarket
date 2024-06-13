@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="641.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.edisondonis.controller.MenuPrincipalController">
+   <children>
+      <ImageView fitHeight="539.0" fitWidth="641.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/MenuPrincipalView.png" />
+         </image>
+      </ImageView>
+      <MenuBar layoutY="1.0" prefHeight="25.0" prefWidth="641.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Modulo">
+            <items>
+              <MenuItem fx:id="btnMenuClientes" mnemonicParsing="false" onAction="#btnMenu" text="Clientes" />
+                  <MenuItem fx:id="btnMenuProveedores" mnemonicParsing="false" onAction="#btnMenu" text="Proveedores" />
+                  <MenuItem fx:id="btnMenuCompras" mnemonicParsing="false" onAction="#btnMenu" text="Compras" />
+                  <MenuItem fx:id="btnMenuTipoProducto" mnemonicParsing="false" onAction="#btnMenu" text="Tipo Producto" />
+                  <MenuItem fx:id="btnMenuEmailProveedor" mnemonicParsing="false" onAction="#btnMenu" text="Email Proveedor" />
+                  <MenuItem fx:id="btnMenuProductos" mnemonicParsing="false" onAction="#btnMenu" text="Productos" />
+                  <MenuItem fx:id="btnMenuFactura" mnemonicParsing="false" onAction="#btnMenu" text="Facturas" />
+                  <MenuItem fx:id="btnMenuDetalleCompra" mnemonicParsing="false" onAction="#btnMenu" text="Detalle Compras" />
+                  <MenuItem fx:id="btnMenuDetalleFactura" mnemonicParsing="false" onAction="#btnMenu" text="Detalle Facturas" />
+                  <MenuItem fx:id="btnMenuTelefonoProveedor" mnemonicParsing="false" onAction="#btnMenu" text="Telefono Proveedor" />
+                  <MenuItem fx:id="btnMenuEmpleados" mnemonicParsing="false" onAction="#btnMenu" text="Empleados" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Servicio y Ayuda">
+            <items>
+              <MenuItem fx:id="btnProgramador" mnemonicParsing="false" onAction="#btnMenu" text="Programador" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>

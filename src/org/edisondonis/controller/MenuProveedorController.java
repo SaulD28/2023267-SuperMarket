@@ -9,6 +9,8 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +27,7 @@ import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
 import org.edisondonis.dao.Conexion;
 import org.edisondonis.models.Proveedores;
+import org.edisondonis.report.GenerarReportes;
 import org.edisondonis.system.Main;
 
 /**
@@ -228,6 +231,13 @@ public class MenuProveedorController implements Initializable   {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public void imprimirReporte(){
+        Map parametros = new HashMap();
+        parametros.put("idProveedor", null);
+        GenerarReportes.mostrarReportes("ReporteProveedores.jasper", "Reporte de los Proveedores", parametros);
+        
     }
 
    public void reporte(){
