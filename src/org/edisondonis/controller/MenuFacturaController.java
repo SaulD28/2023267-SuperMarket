@@ -35,14 +35,14 @@ public class MenuFacturaController implements Initializable {
     private ObservableList<Factura> listaFacturas;
     
     @FXML private Button btnRegresar;
-    @FXML private TextField txtIdFactura;
+    @FXML private TextField txtCodigoFactura;
     @FXML private TextField txtEstado;
     @FXML private TextField txtTotalFactura;
     @FXML private TextField txtFechaFactura;
     @FXML private TextField txtIdCliente;
     @FXML private TextField txtIdEmpleado;
     @FXML private TableView tblFactura;
-    @FXML private TableColumn colIdFactura;
+    @FXML private TableColumn colCodigoFactura;
     @FXML private TableColumn colEstado;
     @FXML private TableColumn colTotalFactura;
     @FXML private TableColumn colFechaFactura;
@@ -61,18 +61,18 @@ public class MenuFacturaController implements Initializable {
     
     public void cargarDatos(){
         tblFactura.setItems(getFacturas());
-        colIdFactura.setCellValueFactory(new PropertyValueFactory<>("idFactura"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
-        colTotalFactura.setCellValueFactory(new PropertyValueFactory<>("totalFactura"));
-        colFechaFactura.setCellValueFactory(new PropertyValueFactory<>("fechaFactura"));
-        colIdCliente.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
-        colIdEmpleado.setCellValueFactory(new PropertyValueFactory<>("idEmpleado"));
+        colCodigoFactura.setCellValueFactory(new PropertyValueFactory<Factura, Integer>("idFactura"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<Factura, String>("estado"));
+        colTotalFactura.setCellValueFactory(new PropertyValueFactory<Factura, Double>("totalFactura"));
+        colFechaFactura.setCellValueFactory(new PropertyValueFactory<Factura, String>("fechaFactura"));
+        colIdCliente.setCellValueFactory(new PropertyValueFactory<Factura, Integer>("idCliente"));
+        colIdEmpleado.setCellValueFactory(new PropertyValueFactory<Factura, Integer>("idEmpleado"));
     }
     
     public void seleccionarElemento(){
         Factura facturaSeleccionada = (Factura) tblFactura.getSelectionModel().getSelectedItem();
         if (facturaSeleccionada != null) {
-            txtIdFactura.setText(String.valueOf(facturaSeleccionada.getIdFactura()));
+            txtCodigoFactura.setText(String.valueOf(facturaSeleccionada.getIdFactura()));
             txtEstado.setText(facturaSeleccionada.getEstado());
             txtTotalFactura.setText(String.valueOf(facturaSeleccionada.getTotalFactura()));
             txtFechaFactura.setText(facturaSeleccionada.getFechaFactura());
@@ -173,7 +173,7 @@ public class MenuFacturaController implements Initializable {
                     btnAgregar.setDisable(true);
                     btnEliminar.setDisable(true);
                     activarControles();
-                    txtIdFactura.setEditable(false);
+                    txtCodigoFactura.setEditable(false);
                     tipoDeOperaciones = Operaciones.ACTUALIZAR;
                 } else
                     JOptionPane.showMessageDialog(null, "DEBE DE SELECCIONAR ALGUN ELEMENTO");
@@ -227,7 +227,7 @@ public class MenuFacturaController implements Initializable {
     }
      
     public void desactivarControles(){
-        txtIdFactura.setEditable(false);
+        txtCodigoFactura.setEditable(false);
         txtEstado.setEditable(false);
         txtTotalFactura.setEditable(false);
         txtFechaFactura.setEditable(false);
@@ -236,7 +236,7 @@ public class MenuFacturaController implements Initializable {
     }    
     
     public void activarControles(){
-        txtIdFactura.setEditable(true);
+        txtCodigoFactura.setEditable(true);
         txtEstado.setEditable(true);
         txtTotalFactura.setEditable(true);
         txtFechaFactura.setEditable(true);
@@ -245,7 +245,7 @@ public class MenuFacturaController implements Initializable {
     }    
     
     public void limpiarControles(){
-        txtIdFactura.clear();
+        txtCodigoFactura.clear();
         txtEstado.clear();
         txtTotalFactura.clear();
         txtFechaFactura.clear();
@@ -255,7 +255,7 @@ public class MenuFacturaController implements Initializable {
     
     public void guardar(){
         Factura factura = new Factura();
-        factura.setIdFactura(Integer.parseInt(txtIdFactura.getText()));
+        factura.setIdFactura(Integer.parseInt(txtCodigoFactura.getText()));
         factura.setEstado(txtEstado.getText());
         factura.setTotalFactura(Double.parseDouble(txtTotalFactura.getText()));
         factura.setFechaFactura(txtFechaFactura.getText());

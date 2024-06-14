@@ -17,7 +17,7 @@ public class Conexion {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection
-        ("jdbc:mysql://localhost:3306/DBSuperMarket?useSSL=false","root","2023267");
+        ("jdbc:mysql://localhost:3306/DBSuperMarket?useSSL=false","root","20232671");
         } catch (ClassNotFoundException | SQLException
                 | InstantiationException | IllegalAccessException e) {
             e.printStackTrace(); 

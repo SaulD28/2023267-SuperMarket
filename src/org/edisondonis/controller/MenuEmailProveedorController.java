@@ -29,12 +29,12 @@ public class MenuEmailProveedorController implements Initializable {
     private ObservableList<EmailProveedor> listaEmailsProveedor;
     
     @FXML private Button btnRegresar;
-    @FXML private TextField txtIdEmailProveedor;
+    @FXML private TextField txtCodigoEmailProveedor;
     @FXML private TextField txtEmailProveedor;
     @FXML private TextField txtDescripcion;
     @FXML private TextField txtIdProveedor;
     @FXML private TableView tblEmailProveedor;
-    @FXML private TableColumn colIdEmailProveedor;
+    @FXML private TableColumn colCodigoEmailProveedor;
     @FXML private TableColumn colEmailProveedor;
     @FXML private TableColumn colDescripcion;
     @FXML private TableColumn colIdProveedor;
@@ -51,16 +51,16 @@ public class MenuEmailProveedorController implements Initializable {
     
     public void cargarDatos(){
         tblEmailProveedor.setItems(getEmailProveedor());
-        colIdEmailProveedor.setCellValueFactory(new PropertyValueFactory<>("idEmailProveedor"));
-        colEmailProveedor.setCellValueFactory(new PropertyValueFactory<>("emailProveedor"));
-        colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        colIdProveedor.setCellValueFactory(new PropertyValueFactory<>("idProveedor"));
+        colCodigoEmailProveedor.setCellValueFactory(new PropertyValueFactory<EmailProveedor, Integer>("idEmailProveedor"));
+        colEmailProveedor.setCellValueFactory(new PropertyValueFactory<EmailProveedor, String>("emailProveedor"));
+        colDescripcion.setCellValueFactory(new PropertyValueFactory<EmailProveedor, String>("descripcion"));
+        colIdProveedor.setCellValueFactory(new PropertyValueFactory<EmailProveedor, Integer>("idProveedor"));
     }
     
     public void seleccionarElemento(){
         EmailProveedor emailSeleccionado = (EmailProveedor) tblEmailProveedor.getSelectionModel().getSelectedItem();
         if (emailSeleccionado != null) {
-            txtIdEmailProveedor.setText(String.valueOf(emailSeleccionado.getIdEmailProveedor()));
+            txtCodigoEmailProveedor.setText(String.valueOf(emailSeleccionado.getIdEmailProveedor()));
             txtEmailProveedor.setText(emailSeleccionado.getEmailProveedor());
             txtDescripcion.setText(emailSeleccionado.getDescripcion());
             txtIdProveedor.setText(String.valueOf(emailSeleccionado.getIdProveedor()));
@@ -157,7 +157,7 @@ public class MenuEmailProveedorController implements Initializable {
                     btnAgregar.setDisable(true);
                     btnEliminar.setDisable(true);
                     activarControles();
-                    txtIdEmailProveedor.setEditable(false);
+                    txtCodigoEmailProveedor.setEditable(false);
                     tipoDeOperaciones = Operaciones.ACTUALIZAR;
                 } else{
                     JOptionPane.showMessageDialog(null, "DEBE DE SELECCIONAR ALGUN ELEMENTO");
@@ -209,21 +209,21 @@ public class MenuEmailProveedorController implements Initializable {
     }
      
     public void desactivarControles(){
-        txtIdEmailProveedor.setEditable(false);
+        txtCodigoEmailProveedor.setEditable(false);
         txtEmailProveedor.setEditable(false);
         txtDescripcion.setEditable(false);
         txtIdProveedor.setEditable(false);
     }    
     
     public void activarControles(){
-        txtIdEmailProveedor.setEditable(true);
+        txtCodigoEmailProveedor.setEditable(true);
         txtEmailProveedor.setEditable(true);
         txtDescripcion.setEditable(true);
         txtIdProveedor.setEditable(true);
     }    
     
     public void limpiarControles(){
-        txtIdEmailProveedor.clear();
+        txtCodigoEmailProveedor.clear();
         txtEmailProveedor.clear();
         txtDescripcion.clear();
         txtIdProveedor.clear();
@@ -231,7 +231,7 @@ public class MenuEmailProveedorController implements Initializable {
     
     public void guardar(){
         EmailProveedor email = new EmailProveedor();
-        email.setIdEmailProveedor(Integer.parseInt(txtIdEmailProveedor.getText()));
+        email.setIdEmailProveedor(Integer.parseInt(txtCodigoEmailProveedor.getText()));
         email.setEmailProveedor(txtEmailProveedor.getText());
         email.setDescripcion(txtDescripcion.getText());
         email.setIdProveedor(Integer.parseInt(txtIdProveedor.getText()));

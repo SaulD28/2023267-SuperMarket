@@ -51,11 +51,11 @@ public class MenuDetalleCompraController implements Initializable {
     
     public void cargarDatos(){
         tblDetalleCompra.setItems(getDetalleCompra());
-        colIdDetalleCompra.setCellValueFactory(new PropertyValueFactory<>("idDetalleCompra"));
-        colCostoUnitario.setCellValueFactory(new PropertyValueFactory<>("costoUnitario"));
-        colCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-        colIdProducto.setCellValueFactory(new PropertyValueFactory<>("idProducto"));
-        colNumeroDocumento.setCellValueFactory(new PropertyValueFactory<>("numeroDocumento"));
+        colIdDetalleCompra.setCellValueFactory(new PropertyValueFactory<DetalleCompra, Integer>("idDetalleCompra"));
+        colCostoUnitario.setCellValueFactory(new PropertyValueFactory<DetalleCompra, Double>("costoUnitario"));
+        colCantidad.setCellValueFactory(new PropertyValueFactory<DetalleCompra, Integer>("cantidad"));
+        colIdProducto.setCellValueFactory(new PropertyValueFactory<DetalleCompra, Integer>("idProducto"));
+        colNumeroDocumento.setCellValueFactory(new PropertyValueFactory<DetalleCompra, Integer>("numeroDocumento"));
     }
     
     public void seleccionarElemento(){

@@ -5,9 +5,12 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -20,6 +23,7 @@ import org.edisondonis.dao.Conexion;
 import org.edisondonis.models.Productos;
 import org.edisondonis.models.Proveedores;
 import org.edisondonis.models.TipoProducto;
+import org.edisondonis.report.GenerarReportes;
 import org.edisondonis.system.Main;
 
 
@@ -31,6 +35,7 @@ public class MenuProductosController implements Initializable {
     private ObservableList <Proveedores> listaProveedores;
     private ObservableList <TipoProducto> listaTipoProducto;
     
+    @FXML private TextField btnRegresar;
     @FXML private TextField txtCodigoProducto;
     @FXML private TextField txtDescripcionProducto;
     @FXML private TextField txtPrecioUnitario;
@@ -291,8 +296,18 @@ public class MenuProductosController implements Initializable {
         }
     }
     
+     public void imprimirReporte(){
+        Map parametros = new HashMap();
+        parametros.put("idProveedor", null);
+        GenerarReportes.mostrarReportes("ReporteProveedores.jasper", "Reporte de los Proveedores", parametros);
+        
+    }
+    
     public void reporte(){
         switch(tipoDeOperacion){
+            case NINGUNO:
+                imprimirReporte();
+                break;
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
@@ -300,7 +315,6 @@ public class MenuProductosController implements Initializable {
                 btnReporte.setText("REPORTE");
                 btnAgregar.setDisable(false);
                 btnEliminar.setDisable(false);
-                txtCodigoProducto.setDisable(false);
                 tipoDeOperacion = operaciones.NINGUNO;
                 break;
         }
@@ -312,5 +326,12 @@ public class MenuProductosController implements Initializable {
 
     public void setEscenarioPrincipal(Main escenarioPrincipal) {
         this.escenarioPrincipal = escenarioPrincipal;
+    }
+    
+    @FXML
+    public void regresar (ActionEvent event){
+        if(event.getSource() == btnRegresar){
+            escenarioPrincipal.menuPrincipalView();
+        }
     }
 }

@@ -1,5 +1,7 @@
 drop database if exists DBSuperMarket;
- 
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '20232671';
+
 create database DBSuperMarket;
 use DBSuperMarket;
 
@@ -162,7 +164,16 @@ Delimiter $$
 Delimiter ;
  
 call sp_AgregarClientes (01, '114006350', 'Harol', 'Luna', 'San Raymundo', '23002626', 'harolyLuna@gmail.com');
- 
+call sp_AgregarClientes (02, '825013950', 'Sara', 'Martinez', 'Villa Nueva', '33445566', 'sara.martinez@example.com');
+call sp_AgregarClientes (03, '209846713', 'Carlos', 'García', 'Mixco', '77778899', 'carlos.garcia@example.com');
+call sp_AgregarClientes (04, '309682340', 'Ana', 'López', 'Amatitlán', '11112233', 'ana.lopez@example.com');
+call sp_AgregarClientes (05, '708015932', 'Pedro', 'Hernández', 'Petapa', '44332211', 'pedro.hernandez@example.com');
+call sp_AgregarClientes (06, '512090831', 'María', 'Gómez', 'Guatemala City', '99887766', 'maria.gomez@example.com');
+call sp_AgregarClientes (07, '909348562', 'Luis', 'Díaz', 'Santa Catarina Pinula', '55667788', 'luis.diaz@example.com');
+call sp_AgregarClientes (08, '609783245', 'Laura', 'Pérez', 'Chimaltenango', '22334455', 'laura.perez@example.com');
+call sp_AgregarClientes (09, '308921760', 'Juan', 'Rodríguez', 'San Lucas Sacatepéquez', '99990011', 'juan.rodriguez@example.com');
+call sp_AgregarClientes (10, '208765394', 'Gabriela', 'Sánchez', 'Escuintla', '88776655', 'gabriela.sanchez@example.com');
+
  
 -- -----------------------------ListarClientes--------------------------------------------------------------------
  
@@ -247,6 +258,16 @@ Delimiter $$
 Delimiter ;
 
 call sp_agregarProveedores(1, '202326', 'Luis','Hernandez','zona 18','falta de cereal','kinal','kinal.academy');
+call sp_agregarProveedores(2, '408973', 'Sofía','Gómez','zona 10','falta de azúcar','panamericana','panamericana@example.com');
+call sp_agregarProveedores(3, '609234', 'Juan','Martínez','zona 15','falta de harina','mayorista','mayorista@example.com');
+call sp_agregarProveedores(4, '702315', 'María','Rodríguez','zona 6','falta de aceite','distribuidora','distribuidora@example.com');
+call sp_agregarProveedores(5, '105846', 'Carlos','López','zona 4','falta de sal','almacén','almacen@example.com');
+call sp_agregarProveedores(6, '308476', 'Laura','Pérez','zona 9','falta de especias','abastecedor','abastecedor@example.com');
+call sp_agregarProveedores(7, '209348', 'Pedro','Sánchez','zona 12','falta de arroz','distribuidor','distribuidor@example.com');
+call sp_agregarProveedores(8, '510982', 'Ana','García','zona 20','falta de café','mayoreo','mayoreo@example.com');
+call sp_agregarProveedores(9, '706523', 'Javier','Martínez','zona 25','falta de lentejas','proveedor','proveedor@example.com');
+call sp_agregarProveedores(10, '903742', 'Gabriela','Díaz','zona 30','falta de azúcar','abarrotería','abarroteria@example.com');
+
 -- -----------------------------------------------------------------ListarProveedores-------------------------------------------------------------------------------------
 Delimiter $$
 	create procedure sp_ListarProveedores()
@@ -263,6 +284,8 @@ Delimiter $$
             from Proveedores P;
 		End $$
 Delimiter ;
+
+call sp_ListarProveedores();
 
 -- ----------------------------------------------------------------BuscarProveedores----------------------------------------------------------------------------------------
 
@@ -521,7 +544,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
--- call sp_ListarProductos();
+call sp_ListarProductos();
  
 -- *********************************************************Buscar Producto***********************************************************************
 Delimiter $$
@@ -574,7 +597,6 @@ Delimiter $$
             where idProducto = _idProducto;
 		End $$
 Delimiter ;
-
 
 -- ************************************************************Agregar DetalleCompra******************************************************************
 Delimiter $$
@@ -1024,3 +1046,4 @@ Delimiter ;
 
 -- call sp_EditarDetalleFactura(); 
 -- call sp_ListarDetalleFactura();
+

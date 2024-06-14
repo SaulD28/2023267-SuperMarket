@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.edisondonis.system;
 
 
@@ -21,7 +16,7 @@ import org.edisondonis.controller.MenuComprasController;
 import org.edisondonis.controller.MenuDetalleCompraController;
 import org.edisondonis.controller.MenuDetalleFacturaController;
 import org.edisondonis.controller.MenuEmailProveedorController;
-import org.edisondonis.controller.MenuEmpleadosController;
+import org.edisondonis.Controller.MenuEmpleadosController;
 import org.edisondonis.controller.MenuFacturaController;
 import org.edisondonis.controller.MenuPrincipalController;
 import org.edisondonis.controller.MenuProductosController;

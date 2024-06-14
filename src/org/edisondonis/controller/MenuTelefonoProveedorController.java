@@ -60,11 +60,11 @@ public class MenuTelefonoProveedorController implements Initializable {
     
     public void cargarDatos(){
         tblTelefonoProveedor.setItems(getTelefonosProveedor());
-        colIdTelefonoProveedor.setCellValueFactory(new PropertyValueFactory<>("idTelefonoProveedor"));
-        colNumeroPrincipal.setCellValueFactory(new PropertyValueFactory<>("numeroPrincipal"));
-        colNumeroSecundario.setCellValueFactory(new PropertyValueFactory<>("numeroSecundario"));
-        colObservaciones.setCellValueFactory(new PropertyValueFactory<>("observaciones"));
-        colIdProveedor.setCellValueFactory(new PropertyValueFactory<>("idProveedor"));
+        colIdTelefonoProveedor.setCellValueFactory(new PropertyValueFactory<TelefonoProveedor, Integer>("idTelefonoProveedor"));
+        colNumeroPrincipal.setCellValueFactory(new PropertyValueFactory<TelefonoProveedor, String>("numeroPrincipal"));
+        colNumeroSecundario.setCellValueFactory(new PropertyValueFactory<TelefonoProveedor, String>("numeroSecundario"));
+        colObservaciones.setCellValueFactory(new PropertyValueFactory<TelefonoProveedor, String>("observaciones"));
+        colIdProveedor.setCellValueFactory(new PropertyValueFactory<TelefonoProveedor, Integer>("idProveedor"));
     }
     
     public void seleccionarElemento(){
